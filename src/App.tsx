@@ -6,6 +6,8 @@ import './App.css'
 import Indicator from './components/Indicator';
 import Summary from './components/Summary';
 import BasicTable from './components/BasicTable';
+import WeatherChart from './components/WeatherChart';
+import ControlPanel from './components/ControlPanel';
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -22,6 +24,12 @@ function App() {
         <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} ></Indicator>
         <Summary></Summary>
         <BasicTable></BasicTable>
+        <Grid xs={12} lg={2}>
+          <ControlPanel />
+        </Grid>
+        <Grid xs={12} lg={10}>
+          <WeatherChart></WeatherChart>
+        </Grid>
 	    </Grid>
     </>
   )
