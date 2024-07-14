@@ -8,13 +8,14 @@ import Summary from './components/Summary';
 import BasicTable from './components/BasicTable';
 import WeatherChart from './components/WeatherChart';
 import ControlPanel from './components/ControlPanel';
+import Information from './components/Information';
 
 function App() {
   //const [count, setCount] = useState(0)
 
   {/* Variable de estado y función de actualización */}
 
-  let [indicators, setIndicators] = useState([])
+  let [informacion, setInformacion] = useState([])
 
   {/* Hook: useEffect */}
 	
@@ -71,33 +72,43 @@ function App() {
               
               {/* Arreglo para agregar los resultados */}
               
-              let dataToIndicators = new Array()
+              let informacion = new Array()
+
               {/* 
                   Análisis, extracción y almacenamiento del contenido del XML 
                   en el arreglo de resultados
               */}
-              let location = xml.getElementsByTagName("location")[1]
+
+              let localidad = xml.getElementsByTagName("location")[1]
+              console.log(localidad)
+
+              let ciudad = ["Ciudad", "Guayaquil"]
+              informacion.push(ciudad)
+
+              let pais = ["Pais", "Ecuador"]
+              informacion.push(pais)
+
+              let zona = ["Zona horaria", "GMT -5"]
+              informacion.push(zona)
+
+              let geobase = localidad.getAttribute("geobaseid")
+              informacion.push(["Geobaseid", geobase])
               
-              let geobaseid = location.getAttribute("geobaseid")
-              dataToIndicators.push(["Location","Geobaseid", geobaseid])
+              let latitud = localidad.getAttribute("latitude")
+              informacion.push(["Latitud", latitud])
               
-              let latitude = location.getAttribute("latitude")
-              dataToIndicators.push(["Location","Latitude", latitude])
-              
-              let longitude = location.getAttribute("longitude")
-              dataToIndicators.push(["Location","Longitude", longitude])
-              
-              console.log( dataToIndicators )
+              let longitud = localidad.getAttribute("longitude")
+              informacion.push(["Longitud", longitud])
               
               {/* Renderice el arreglo de resultados en un arreglo de elementos Indicator */}
               
-              let indicatorsElements = Array.from(dataToIndicators).map(
-                (element) => <Indicator title={element[0]} subtitle={element[1]} value={element[2]} />
+              let informacionElements = Array.from(informacion).map(
+                (element) => <Information title={element[0]} value={element[1]} />
               )
             
               {/* Modificación de la variable de estado mediante la función de actualización */}
-            
-              setIndicators(indicatorsElements)
+              
+              setInformacion(informacionElements)
             
             })()    
       },
@@ -107,22 +118,39 @@ function App() {
 
   return (
     <>
+        <section id="informacion">
+          <h1>Información</h1>
+          <Grid container spacing={5}>
+            <Grid xs={6} sm={4} md={3} lg={2}>
+                {informacion[0]}
+            </Grid>
+            <Grid xs={6} sm={4} md={3} lg={2}>
+                {informacion[1]}
+            </Grid>
+            <Grid xs={6} sm={4} md={3} lg={2}>
+                {informacion[2]}
+            </Grid>
+            <Grid xs={6} sm={4} md={3} lg={2}>
+                {informacion[3]}
+            </Grid>
+            <Grid xs={6} sm={4} md={3} lg={2}>
+                {informacion[4]}
+            </Grid>
+            <Grid xs={6} sm={4} md={3} lg={2}>
+                {informacion[5]}
+            </Grid>
+          </Grid>
+        </section>
+        <section id="actual">
+          <h1>Clima actual</h1>
+        </section>
+        <section id ="prediccion">
+          <h1>Próximos 3 días</h1>
+        </section>
+        <section id="resumen">
+          <h1>Resumen</h1>
+        </section>
         <Grid container spacing={5}>
-            <Grid xs={12} sm={4} md={3} lg={2}>
-                {indicators[0]}
-                {/* <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} ></Indicator> */}
-            </Grid>
-	          <Grid xs={6} sm={4} md={3} lg={2}>
-                {indicators[1]}
-                {/* <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} ></Indicator> */}
-            </Grid>
-	          <Grid xs={6} sm={4} md={3} lg={2}>
-                {indicators[2]}
-                {/* <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} ></Indicator> */}
-            </Grid>
-	          <Grid xs={12} sm={4} md={3} lg={2}>4</Grid>
-	          <Grid xs={6} sm={4} md={6} lg={2}>5</Grid>
-	          <Grid xs={6} sm={4} md={6} lg={2}>6</Grid>
             <Summary></Summary>
             <BasicTable></BasicTable>
             <Grid xs={12} lg={2}>
