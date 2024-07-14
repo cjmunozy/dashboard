@@ -3,7 +3,7 @@ import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
 import './App.css'
-import Indicator from './components/Indicator';
+//import Indicator from './components/Indicator';
 import Summary from './components/Summary';
 import BasicTable from './components/BasicTable';
 import WeatherChart from './components/WeatherChart';
@@ -15,7 +15,7 @@ function App() {
 
   {/* Variable de estado y función de actualización */}
 
-  let [informacion, setInformacion] = useState([])
+  let [informacion, setInformacion] = useState<React.ReactNode[]>([])
 
   {/* Hook: useEffect */}
 	
@@ -26,7 +26,7 @@ function App() {
           
               {/* Del LocalStorage, obtiene el valor de las claves openWeatherMap y expiringTime */}
 
-              let savedTextXML = localStorage.getItem("openWeatherMap")
+              let savedTextXML = localStorage.getItem("openWeatherMap")!
               let expiringTime = localStorage.getItem("expiringTime")
 
               {/* Estampa de tiempo actual */}
@@ -79,14 +79,14 @@ function App() {
                   en el arreglo de resultados
               */}
 
+              let datos = xml.getElementsByTagName("location")[0]
               let localidad = xml.getElementsByTagName("location")[1]
-              console.log(localidad)
 
-              let ciudad = ["Ciudad", "Guayaquil"]
-              informacion.push(ciudad)
+              let ciudad = datos.querySelector("name")?.textContent
+              informacion.push(["Ciudad", ciudad])
 
-              let pais = ["Pais", "Ecuador"]
-              informacion.push(pais)
+              let pais = datos.querySelector("country")?.textContent
+              informacion.push(["Pais", pais])
 
               let zona = ["Zona horaria", "GMT -5"]
               informacion.push(zona)
