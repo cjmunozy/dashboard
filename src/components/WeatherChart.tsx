@@ -1,7 +1,16 @@
+import { useEffect, useState } from 'react';
 import { Chart } from "react-google-charts";
 import Paper from '@mui/material/Paper';
 
-export default function WeatherChart() {
+interface Config {
+    datos: String[][]
+}
+
+export default function WeatherChart(data: Config) {
+
+    let [datos, setDatos] = useState<any[][]>([
+        ["Hora", "Precipitación", "Humedad", "Nubosidad"]
+    ])
 
     {/* Configuración */}
 
@@ -12,7 +21,8 @@ export default function WeatherChart() {
     }
 
     {/* Datos de las variables meteorológicas */}
-
+    
+    /*
     const data = [
         ["Hora", "Precipitación", "Humedad", "Nubosidad"],
         ["03:00", 13, 78, 75],
@@ -23,6 +33,15 @@ export default function WeatherChart() {
         ["18:00", 6, 64, 84],
         ["21:00", 5, 77, 99]
     ];
+    */
+
+    useEffect( () => {
+        (()=> {
+
+            setDatos(data.datos)
+    
+        })()
+    }, []);
 
     {/* JSX */}
 
@@ -36,7 +55,7 @@ export default function WeatherChart() {
         >
             <Chart
                 chartType="LineChart"
-                data={data}
+                data={datos}
                 width="100%"
                 height="400px"
                 options={options}

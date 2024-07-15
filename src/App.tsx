@@ -31,6 +31,10 @@ function App() {
 
   let [rowsTable, setRowsTable] = useState<Row[]>([])
 
+  let [dataGraph, setDataGraph] = useState<any[][]>([
+    ["Hora", "Precipitación", "Humedad", "Nubosidad"]
+  ])
+
   {/* Hook: useEffect */}
 	
   useEffect(
@@ -163,6 +167,14 @@ function App() {
                 }
                 return row
               })!
+
+              let arrayGrafico = Array.from(predicciones).map((prediccion) => {
+                let hora = prediccion.getAttribute("from")!.split("T")[1].substring(0, 5);
+                let precipitacion = prediccion.querySelector("precipitation")!.getAttribute("probability")
+                let humedad = prediccion.querySelector("humidity")!.getAttribute("value")
+                let nubosidad = prediccion.querySelector("clouds")!.getAttribute("all")
+                return [hora, parseFloat(precipitacion!), parseFloat(humedad!), parseFloat(nubosidad!)]
+              })
               
               
               {/* Renderice el arreglo de resultados en un arreglo de elementos Indicator */}
@@ -182,6 +194,11 @@ function App() {
               setNow(nowElements)
 
               setRowsTable(arrayPredicciones)
+
+              setDataGraph([
+                ["Hora", "Precipitación", "Humedad", "Nubosidad"],
+                ...arrayGrafico
+              ])
             
             })()    
       },
@@ -252,7 +269,7 @@ function App() {
               <ControlPanel />
             </Grid>
             <Grid xs={12} lg={10}>
-              <WeatherChart></WeatherChart>
+              <WeatherChart datos={dataGraph}></WeatherChart>
             </Grid>
             <Summary></Summary>
 	      </Grid>
