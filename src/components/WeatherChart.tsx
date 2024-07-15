@@ -3,7 +3,7 @@ import { Chart } from "react-google-charts";
 import Paper from '@mui/material/Paper';
 
 interface Config {
-    datos: String[][]
+    datos: any[][]
 }
 
 export default function WeatherChart(data: Config) {
@@ -41,7 +41,7 @@ export default function WeatherChart(data: Config) {
             setDatos(data.datos)
     
         })()
-    }, []);
+    }, [datos]);
 
     {/* JSX */}
 

@@ -46,6 +46,7 @@ function App() {
 
               let nowTextXML = localStorage.getItem("nowOpenWeatherMap")!
               let forecastTextXML = localStorage.getItem("forecastOpenWeatherMap")!
+              let horas = localStorage.getItem("horas")
               let expiringTime = localStorage.getItem("expiringTime")
 
               {/* Estampa de tiempo actual */}
@@ -174,7 +175,7 @@ function App() {
                 let humedad = prediccion.querySelector("humidity")!.getAttribute("value")
                 let nubosidad = prediccion.querySelector("clouds")!.getAttribute("all")
                 return [hora, parseFloat(precipitacion!), parseFloat(humedad!), parseFloat(nubosidad!)]
-              })
+              })!
               
               
               {/* Renderice el arreglo de resultados en un arreglo de elementos Indicator */}
