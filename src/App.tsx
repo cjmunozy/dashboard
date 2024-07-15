@@ -46,7 +46,6 @@ function App() {
 
               let nowTextXML = localStorage.getItem("nowOpenWeatherMap")!
               let forecastTextXML = localStorage.getItem("forecastOpenWeatherMap")!
-              let horas = localStorage.getItem("horas")
               let expiringTime = localStorage.getItem("expiringTime")
 
               {/* Estampa de tiempo actual */}
