@@ -165,7 +165,7 @@ function App() {
                   "presion": presion!
                 }
                 return row
-              })!
+              })
 
               let arrayGrafico = Array.from(predicciones).map((prediccion) => {
                 let hora = prediccion.getAttribute("from")!.split("T")[1].substring(0, 5);
