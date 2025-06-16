@@ -3,7 +3,6 @@ import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
 import './App.css'
-//import Indicator from './components/Indicator';
 import Summary from './components/Summary';
 //import BasicTable from './components/BasicTable';
 import WeatherChart from './components/WeatherChart';
