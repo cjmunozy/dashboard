@@ -179,7 +179,7 @@ function App() {
               {/* Renderice el arreglo de resultados en un arreglo de elementos Indicator */}
               
               let informacionElements = Array.from(informacion).map(
-                (element) => <Information title={element[0]} value={element[1]} />
+                (element, idx) => <Information key={idx} title={element[0]} value={element[1]} />
               )
 
               let nowElements = Array.from(now).map(
