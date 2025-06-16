@@ -27,7 +27,7 @@ export default function ControlPanel() {
         {"name":"Nubosidad", "description":"Grado de cobertura del cielo por nubes, afectando la visibilidad y la cantidad de luz solar recibida."}
     ]
 
-    let options = items.map( (item, key) => <MenuItem key={key} value={key}>{item["name"]}</MenuItem> )
+    let options = items.map( (item, key) => <MenuItem key={item.name} value={key}>{item["name"]}</MenuItem> )
 
     {/* Manejador de eventos */}
 		
