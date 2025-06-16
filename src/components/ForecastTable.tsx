@@ -40,7 +40,7 @@ interface Config {
   rows: Array<Row>
 }
  
-export default function ForecastTable(data: Config) {
+export default function ForecastTable(data: Readonly<Config>) {
 
   {/* 
     Declare la variable de estado (rows) y la función de actualización (setRows).
